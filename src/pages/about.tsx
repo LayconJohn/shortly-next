@@ -4,14 +4,14 @@ import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function About() {
   return (
     <>
       <Head>
-        <h1>Hello Next App</h1>
+        <title>About</title>
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-
+        <h1>Olá</h1>
       </main>
     </>
   )
