@@ -7,10 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Login() {
+export default function Register() {
 
     const toastOptions = {
-        autoClose: 6000,
+        autoClose: 7500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -19,8 +19,10 @@ export default function Login() {
       };
 
     const [valuesForm, setValuesForm] = useState({
+        name: "",
+        password: "",
         email: "",
-        password: ""
+
     });
 
     function handleChange(e: { target: { name: string; value: string; }; }) {
@@ -32,15 +34,21 @@ export default function Login() {
         toast("Em breve...", toastOptions)
     }
 
-    return(
-        <div  className={`${styles.cardContainer} ${inter.className}`}>
-            <h1 className={`${styles.cardTitle} ${inter.className}`}>Login</h1>
-            <form onSubmit={handleSubmit}>
+    return (
+        <div className={`${styles.cardContainer} ${inter.className}`}>
+             <h1 className={`${styles.cardTitle} ${inter.className}`}>Register</h1>
+             <form onSubmit={handleSubmit}>
                 <input 
                     className={`${styles.cardInput} ${inter.className}`} 
                     type="text"
                     placeholder="Username"
                     min="4"
+                    onChange={(e) => handleChange(e)}
+                />
+                <input 
+                    className={`${styles.cardInput} ${inter.className}`} 
+                    type="text"
+                    placeholder="Email"
                     onChange={(e) => handleChange(e)}
                 />
                 <input 
@@ -51,9 +59,8 @@ export default function Login() {
                     onChange={(e) => handleChange(e)}
                 />
                 <Button />
-            </form>
+             </form>
             <ToastContainer />
         </div>
-        
     )
 }
