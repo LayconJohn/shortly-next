@@ -7,11 +7,8 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <>
-      <Head>
-        <h1>Hello Next App</h1>
-      </Head>
       <main className={`${styles.main} ${inter.className}`}>
-
+        <h1 className={`${styles.title}`}>Shortly</h1>
       </main>
     </>
   )

@@ -5,6 +5,11 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  background-color: #131324;;
+}
+
+.title{
+  color: white;
 }
 
 .description {
