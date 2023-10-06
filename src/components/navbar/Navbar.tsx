@@ -38,7 +38,7 @@ const NavLink = (props: Props) => {
       rounded={'md'}
       _hover={{
         textDecoration: 'none',
-        bg: useColorModeValue('gray.200', 'gray.700'),
+        bg: useColorModeValue('gray.200', 'gray.700')
       }}
       href={'#'}>
       {children}
@@ -80,7 +80,7 @@ export default function NavBar( {profileImage}: ProspsNavBar ) {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box>Shortly</Box>
+            <Box onClick={() => router.push("/")} >Shortly</Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
@@ -111,7 +111,7 @@ export default function NavBar( {profileImage}: ProspsNavBar ) {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem  onClick={() => router.push("/auth/login")}>Login</MenuItem>
+                <MenuItem onClick={() => router.push("/auth/login")}>Login</MenuItem>
                 <MenuItem onClick={() => router.push("/register")}>Registrar</MenuItem>
                 <MenuDivider />
                 <MenuItem onClick={logout}>Sair</MenuItem>

@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { useState } from "react"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { shortlyService } from "@/services/shortly";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +22,7 @@ export default function Register() {
     const [valuesForm, setValuesForm] = useState({
         name: "",
         password: "",
+        confirmPassword: "",
         email: "",
 
     });
@@ -31,9 +33,49 @@ export default function Register() {
         setValuesForm({...valuesForm, [e.target.name]: e.target.value});
     }
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    function resetForm() {
+        setValuesForm({
+            name: "",
+            password: "",
+            email: "",
+            confirmPassword: ""
+        })
+    }
+
+    function handleError(error: Error) {
+        const code = Number(error.message.slice(-3))
+            switch (code) {
+                case 422:
+                    toast.error("Preencha os campos corretamente")
+                    
+                    break
+                case 409: 
+                    toast.error("Usuário já cadastrado")
+                    
+                    break
+                default:
+                    toast.error("Ocorreu um erro inesperado")
+                    
+            }  
+            
+    }
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        toast("Em breve...", toastOptions)
+        setIsDisabled(true)
+        
+        try {
+            await shortlyService.register(valuesForm)
+            toast(`Bem vindo ${valuesForm.name}`, toastOptions)
+            localStorage.setItem("app-user", valuesForm.name)
+        } catch (error) {
+            console.log(error)
+            if (error instanceof Error) {
+                handleError(error)
+            }
+        }
+        resetForm()
+        setIsDisabled(false)
     }
 
     return (
@@ -42,21 +84,36 @@ export default function Register() {
              <form onSubmit={handleSubmit}>
                 <input 
                     className={`${styles.cardInput} ${inter.className}`} 
+                    name="name"
                     type="text"
                     placeholder="Username"
                     min="4"
+                    value={valuesForm.name}
                     onChange={(e) => handleChange(e)}
                 />
                 <input 
                     className={`${styles.cardInput} ${inter.className}`} 
+                    name="email"
+                    value={valuesForm.email}
                     type="text"
                     placeholder="Email"
                     onChange={(e) => handleChange(e)}
                 />
                 <input 
                     className={`${styles.cardInput} ${inter.className}`} 
+                    name="password"
                     type="password"
+                    value={valuesForm.password}
                     placeholder="Password"
+                    min="6"
+                    onChange={(e) => handleChange(e)}
+                />
+                <input 
+                    className={`${styles.cardInput} ${inter.className}`} 
+                    name="confirmPassword"
+                    value={valuesForm.confirmPassword}
+                    type="password"
+                    placeholder="confirm Password"
                     min="6"
                     onChange={(e) => handleChange(e)}
                 />
