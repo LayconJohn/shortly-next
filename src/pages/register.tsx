@@ -25,6 +25,8 @@ export default function Register() {
 
     });
 
+    const [isDisabled, setIsDisabled] = useState<boolean>(false)
+
     function handleChange(e: { target: { name: string; value: string; }; }) {
         setValuesForm({...valuesForm, [e.target.name]: e.target.value});
     }
@@ -58,7 +60,7 @@ export default function Register() {
                     min="6"
                     onChange={(e) => handleChange(e)}
                 />
-                <Button />
+                <Button text="Cadastrar" disabled={isDisabled}/>
              </form>
             <ToastContainer />
         </div>

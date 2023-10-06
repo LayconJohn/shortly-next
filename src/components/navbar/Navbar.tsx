@@ -18,6 +18,9 @@ import {
   Stack,
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link';
 
 interface Props {
   children: React.ReactNode
@@ -43,8 +46,27 @@ const NavLink = (props: Props) => {
   )
 }
 
-export default function NavBar() {
+interface ProspsNavBar {
+  profileImage: string
+}
+
+export default function NavBar( {profileImage}: ProspsNavBar ) {
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const toastOptions = {
+    autoClose: 30000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
+
+  function logout(): void {
+    localStorage.setItem("app-user", "")
+    router.push("/auth/login")
+  }
+
 
   return (
     <>
@@ -84,15 +106,15 @@ export default function NavBar() {
                 <Avatar
                   size={'sm'}
                   src={
-                    'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                    profileImage
                   }
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
+                <MenuItem  onClick={() => router.push("/auth/login")}>Login</MenuItem>
+                <MenuItem onClick={() => router.push("/register")}>Registrar</MenuItem>
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                <MenuItem onClick={logout}>Sair</MenuItem>
               </MenuList>
             </Menu>
           </Flex>

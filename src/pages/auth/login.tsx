@@ -23,6 +23,8 @@ export default function Login() {
         password: ""
     });
 
+    const [isDisabled, setIsDisabled] = useState<boolean>(false)
+
     function handleChange(e: { target: { name: string; value: string; }; }) {
         setValuesForm({...valuesForm, [e.target.name]: e.target.value});
     }
@@ -50,7 +52,7 @@ export default function Login() {
                     min="6"
                     onChange={(e) => handleChange(e)}
                 />
-                <Button />
+                <Button text="Entrar" disabled={isDisabled}/>
             </form>
             <ToastContainer />
         </div>
