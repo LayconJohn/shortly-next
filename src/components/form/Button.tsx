@@ -10,8 +10,10 @@ interface IButtonProps {
 
 export default function Button( {text, disabled}: IButtonProps ) {
     return (
-        <button className={`${styles.cardButton} ${inter.className}`} type="submit" disabled={disabled}>
-            {text}
-        </button>
+        <div className={`${styles.cardButtonContainer}`}>
+            <button className={`${styles.cardButton} ${inter.className}`} type="submit" disabled={disabled}>
+                {text}
+            </button>
+        </div>
     )
 }

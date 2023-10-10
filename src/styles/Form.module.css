@@ -1,6 +1,9 @@
 .cardTitle{
     color: white;
     gap: 0.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    
 }
 
 .cardContainer { 
@@ -12,6 +15,14 @@
     gap: 1rem;
     align-items: center;
     background-color: #131324;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 
@@ -29,10 +40,25 @@
     background-color: transparent;
     padding: 1rem; 
     border: 0.1rem solid #4e0eff;
-    border-radius: 0.4rem;
+    border-radius: 0.5rem;
     color: white;
     width: 100%;
     font-size: 1rem;
+
+}
+
+@media (focus: focus) and (pointer: fine) {
+    .cardInput:focus {
+        border: 0.1rem solid #997af0;
+        outline: none;
+    }
+  
+}
+
+.cardButtonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardButton{
@@ -46,15 +72,13 @@
     font-size: 1rem;
     text-transform: uppercase;
     transition: 0.5s ease-in-out;
+
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .card:hover {
-      background: rgba(var(--card-rgb), 0.1);
+    .cardButton:hover {
+      background: #4e0eff;
       border: 1px solid rgba(var(--card-border-rgb), 0.15);
     }
   
-    .card:hover button {
-      transform: translateX(4px);
-    }
-  }
+}

@@ -81,9 +81,9 @@ export default function Register() {
     return (
         <div className={`${styles.cardContainer} ${inter.className}`}>
              <h1 className={`${styles.cardTitle} ${inter.className}`}>Register</h1>
-             <form onSubmit={handleSubmit}>
+             <form onSubmit={handleSubmit} className={`${styles.formContainer}`}>
                 <input 
-                    className={`${styles.cardInput} ${inter.className}`} 
+                    className={`${styles.cardInput}  ${inter.className}`} 
                     name="name"
                     type="text"
                     placeholder="Username"
