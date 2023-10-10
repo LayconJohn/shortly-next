@@ -34,6 +34,7 @@ export default function Home() {
     <>
       <main className={`${styles.main} ${inter.className}`}>
         <h1 className={`${styles.title}`}>Shortly</h1>
+        <p className={`${styles.description}`}>Encurtador de Links</p>
         <ToastContainer />
       </main>
     </>

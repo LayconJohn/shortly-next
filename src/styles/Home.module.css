@@ -1,7 +1,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
@@ -10,13 +10,12 @@
 
 .title{
   color: white;
+  font-size: 2rem;
 }
 
-.cardLogin{
-  
-}
 
 .description {
+  color: white;
   display: inherit;
   justify-content: inherit;
   align-items: inherit;
