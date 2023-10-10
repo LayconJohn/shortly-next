@@ -5,13 +5,16 @@ import { useState } from "react"
 import { ToastContainer, toast } from "react-toastify";
 import { shortlyService } from "@/services/shortly";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Login() {
+
+    const router = useRouter()
  
     const toastOptions = {
-        autoClose: 6000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -36,9 +39,6 @@ export default function Login() {
                 case 422:
                     toast.error("Preencha os campos corretamente")
                     break
-                case 409: 
-                    toast.error("Usuário já cadastrado")
-                    break
                 default:
                     toast.error("Ocorreu um erro inesperado")     
             }        
@@ -58,6 +58,9 @@ export default function Login() {
         try {
             await shortlyService.login(valuesForm)
             toast(`Bem vindo`, toastOptions)
+            setTimeout(() => {
+                router.push("/")
+            }, 2000)       
         } catch (error) {
             if (error instanceof Error) {
                 handleError(error)
