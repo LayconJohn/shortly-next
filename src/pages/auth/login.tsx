@@ -37,7 +37,7 @@ export default function Login() {
     return(
         <div  className={`${styles.cardContainer} ${inter.className}`}>
             <h1 className={`${styles.cardTitle} ${inter.className}`}>Login</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={`${styles.formContainer}`}>
                 <input 
                     className={`${styles.cardInput} ${inter.className}`} 
                     type="text"
