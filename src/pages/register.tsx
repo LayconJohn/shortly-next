@@ -47,23 +47,27 @@ export default function Register() {
             switch (code) {
                 case 422:
                     toast.error("Preencha os campos corretamente")
-                    
                     break
                 case 409: 
                     toast.error("Usuário já cadastrado")
-                    
                     break
                 default:
-                    toast.error("Ocorreu um erro inesperado")
-                    
-            }  
-            
+                    toast.error("Ocorreu um erro inesperado")     
+            }        
+    }
+
+    function validForm() {    
+        if (valuesForm.password !== valuesForm.confirmPassword) {
+            toast.error("Senha e confirmar senha devem ser iguais")
+            resetForm()
+            return true;
+        }
     }
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         setIsDisabled(true)
-        
+        if (validForm()) return
         try {
             await shortlyService.register(valuesForm)
             toast(`Bem vindo ${valuesForm.name}`, toastOptions)

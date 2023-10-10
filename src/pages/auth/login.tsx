@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Login() {
-
+ 
     const toastOptions = {
         autoClose: 6000,
         hideProgressBar: false,
