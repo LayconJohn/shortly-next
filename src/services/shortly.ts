@@ -12,6 +12,11 @@ async function register(body: IUser) {
     return axios.post(`${BASE_URL}/signup`, body)
 }
 
+async function login(body: Omit<IUser, "name">) {
+    return axios.post(`${BASE_URL}/signin`, body)
+}
+
 export const shortlyService = {
     register,
+    login,
 }
