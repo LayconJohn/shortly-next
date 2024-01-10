@@ -3,7 +3,7 @@
 import { shortlyService } from "@/services/shortly";
 import { redirect } from "next/navigation";
 
-export async function resgiterAction(prevState: any, formData: FormData){
+export async function registerAction(prevState: any, formData: FormData){
     const body = JSON.stringify({
         name: formData.get('name'),
         password: formData.get("password"),
