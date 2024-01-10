@@ -17,11 +17,19 @@ async function register(body: string) {
         },
         body: body,
     }
-    return fetch(`${BASE_URL}/signup`, config)
+    return fetch(`${BASE_URL}/register`, config)
 }
 
-async function login(body: Omit<IUser, "name">) {
-    return axios.post(`${BASE_URL}/signin`, body)
+async function login(body: string) {
+    const config = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: body,
+    };
+
+    return fetch(`${BASE_URL}/auth/login`, config)
 }
 
 export const shortlyService = {
