@@ -5,11 +5,19 @@ export const BASE_URL = "http://localhost:5000";
 interface IUser {
     name: string,
     email: string,
-    password: string
+    password: string,
+    confirmPassword: string,
 }
 
-async function register(body: IUser) {
-    return axios.post(`${BASE_URL}/signup`, body)
+async function register(body: string) {
+    const config = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: body,
+    }
+    return fetch(`${BASE_URL}/signup`, config)
 }
 
 async function login(body: Omit<IUser, "name">) {
