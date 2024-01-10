@@ -1,7 +1,6 @@
 import Button from "@/components/form/Button"
 import styles from "@/styles/Form.module.css"
 import { Inter } from 'next/font/google'
-import { useState } from "react"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Form from "@/components/form/Form";
@@ -11,29 +10,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Register() {
 
-    const toastOptions = {
-        autoClose: 7500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    };
-
-
-    function handleError(error: Error) {
-        const code = Number(error.message.slice(-3))
-            switch (code) {
-                case 422:
-                    toast.error("Preencha os campos corretamente")
-                    break
-                case 409: 
-                    toast.error("Usuário já cadastrado")
-                    break
-                default:
-                    toast.error("Ocorreu um erro inesperado")     
-            }        
-    }
 
     return (
         <div className={`${styles.cardContainer} ${inter.className}`}>
