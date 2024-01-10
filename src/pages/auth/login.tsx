@@ -6,95 +6,36 @@ import { ToastContainer, toast } from "react-toastify";
 import { shortlyService } from "@/services/shortly";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from 'next/navigation'
+import Form from "@/components/form/Form";
+import { loginAction } from "@/actions/auth";
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Login() {
 
-    const router = useRouter()
- 
-    const toastOptions = {
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      };
-
-    const [valuesForm, setValuesForm] = useState({
-        email: "",
-        password: ""
-    });
-
-    const [isDisabled, setIsDisabled] = useState<boolean>(false)
-
-    function handleChange(e: { target: { name: string; value: string; }; }) {
-        setValuesForm({...valuesForm, [e.target.name]: e.target.value});
-    }
-
-    function handleError(error: Error) {
-        const code = Number(error.message.slice(-3))
-            switch (code) {
-                case 422:
-                    toast.error("Preencha os campos corretamente")
-                    break
-                default:
-                    toast.error("Ocorreu um erro inesperado")     
-            }        
-    }
-
-    function resetForm() {
-        setValuesForm({
-            password: "",
-            email: "",
-        })
-    }
-
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        setIsDisabled(true)
-
-        try {
-            await shortlyService.login(valuesForm)
-            toast(`Bem vindo`, toastOptions)
-            setTimeout(() => {
-                router.push("/")
-            }, 2000)       
-        } catch (error) {
-            if (error instanceof Error) {
-                handleError(error)
-            }
-        }
-        resetForm()
-        setIsDisabled(false)
-        
-    }
-
     return(
         <div  className={`${styles.cardContainer} ${inter.className}`}>
             <h1 className={`${styles.cardTitle} ${inter.className}`}>Login</h1>
-            <form onSubmit={handleSubmit} className={`${styles.formContainer}`}>
+            <Form action={loginAction} className={`${styles.formContainer}`}>
                 <input 
                     className={`${styles.cardInput} ${inter.className}`} 
                     type="emal"
                     name="email"
                     placeholder="Email"
-                    value={valuesForm.email}
                     min="4"
-                    onChange={(e) => handleChange(e)}
                 />
                 <input 
                     className={`${styles.cardInput} ${inter.className}`} 
                     type="password"
                     name="password"
                     placeholder="Password"
-                    min="6"
-                    value={valuesForm.password}
-                    onChange={(e) => handleChange(e)}
+                    min="8"
+
                 />
-                <Button text="Entrar" disabled={isDisabled}/>
-            </form>
+                <Button type="submit">
+                    Entrar
+                </Button>
+            </Form>
             <ToastContainer />
         </div>
         
