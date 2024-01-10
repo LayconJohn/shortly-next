@@ -7,7 +7,7 @@ import NavBar from '@/components/navbar/Navbar'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider >
-      <NavBar />
+      <NavBar profileImage={''} />
       <Component {...pageProps} />
     </ChakraProvider>
     
